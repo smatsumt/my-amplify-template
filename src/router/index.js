@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { components, AmplifyEventBus } from 'aws-amplify-vue';
+import { AmplifyEventBus } from 'aws-amplify-vue';
 // eslint-disable-next-line no-unused-vars
 import Amplify, * as AmplifyModules from 'aws-amplify';
 import { AmplifyPlugin } from 'aws-amplify-vue';
@@ -74,7 +74,7 @@ const routes = [
   {
     path: '/auth',
     name: 'Authenticator',
-    component: components.Authenticator
+    component: () => import('../views/Auth.vue')
   },
   {
     path: '/logout',
