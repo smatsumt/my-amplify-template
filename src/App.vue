@@ -1,16 +1,15 @@
 <template>
   <v-app>
     <v-toolbar max-height="56px">
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-toolbar-title>my-amplify-template</v-toolbar-title>
       <v-spacer/>
-      <router-link to="/">Home</router-link>
-      <v-spacer/>
-      <router-link to="/about">About</router-link>
-      <v-spacer/>
-      <router-link to="/profile" v-if="user">Profile</router-link>
-      <v-spacer/>
+      <v-btn text to="/">Home</v-btn>
+      <v-btn text to="/about">About</v-btn>
+      <v-btn text to="/profile" v-if="user">Profile</v-btn>
       <amplify-sign-out v-if="user"></amplify-sign-out>
     </v-toolbar>
-    <v-content style="padding-top: 12px">
+    <v-content style="padding: 12px">
       <router-view/>
     </v-content>
   </v-app>

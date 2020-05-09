@@ -1,17 +1,26 @@
 <template>
   <div class="home">
     <h2>Todo list</h2>
+    <v-container>
+      <v-row>
+        <v-col cols="4">
     <v-text-field
       autofocus
       placeholder="Input new todo"
       v-model="name"
     />
+        </v-col>
+        <v-col cols="7">
     <v-text-field
       placeholder="Description"
       v-model="description"
     />
-    <v-btn v-on:click="create">作成</v-btn>
-
+        </v-col>
+        <v-col cols="1">
+    <v-btn v-on:click="create">create</v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
   <v-data-table
     :headers="headers"
     :items="todos"
