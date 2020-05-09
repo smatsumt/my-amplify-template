@@ -75,7 +75,13 @@ const routes = [
     path: '/auth',
     name: 'Authenticator',
     component: components.Authenticator
-  }
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: Home,
+    meta: { requiresAuth: true},  // to redirect to /auth. Direct to /auth does not refresh top menu
+  },
 ]
 
 const router = new VueRouter({
