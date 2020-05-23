@@ -35,7 +35,7 @@
       </v-icon>
       <v-icon
         small
-        @click="deleteItem(item)"
+        @click="remove(item)"
       >
         mdi-delete
       </v-icon>
@@ -50,6 +50,7 @@
 
 <script>
 import AmplifyStore from '@/store/'
+import { Logger, API, graphqlOperation } from 'aws-amplify'
 
 import { listTodos }  from '../graphql/queries.js';
 import { createTodo, deleteTodo }  from '../graphql/mutations.js';
@@ -70,21 +71,21 @@ export default {
     }
   },
   mounted() {
-    this.logger = new this.$Amplify.Logger('HOME_component')
+    this.logger = new Logger('HOME_component')
     this.list();
-    this.$Amplify.API.graphql(this.$Amplify.graphqlOperation(onCreateTodo)).subscribe({
+    API.graphql(graphqlOperation(onCreateTodo)).subscribe({
       next: (data) => {
         console.log(data);
         this.list();
       }
     });
-    this.$Amplify.API.graphql(this.$Amplify.graphqlOperation(onUpdateTodo)).subscribe({
+    API.graphql(graphqlOperation(onUpdateTodo)).subscribe({
       next: (data) => {
         console.log(data);
         this.list();
       }
     });
-    this.$Amplify.API.graphql(this.$Amplify.graphqlOperation(onDeleteTodo)).subscribe({
+    API.graphql(graphqlOperation(onDeleteTodo)).subscribe({
       next: (data) => {
         console.log(data);
         this.list();
@@ -99,7 +100,7 @@ export default {
       // called from v-data-table
     },
     list() {
-      this.$Amplify.API.graphql(this.$Amplify.graphqlOperation(listTodos, {}))
+      API.graphql(graphqlOperation(listTodos, {}))
       .then((res) => {
         this.todos = res.data.listTodos.items;
         this.logger.info(`Todos successfully listed`, res)
@@ -109,7 +110,7 @@ export default {
       });
     },
     remove(id) {
-      this.$Amplify.API.graphql(this.$Amplify.graphqlOperation(deleteTodo, {id}))
+      API.graphql(graphqlOperation(deleteTodo, {id}))
       .then((res) => {
         this.logger.info(`Todo ${id} removed`, res);
         this.list();
@@ -120,7 +121,7 @@ export default {
     },
     create() {
       let descStr = this.description + " by " + AmplifyStore.state.user.username;
-      this.$Amplify.API.graphql(this.$Amplify.graphqlOperation(createTodo, {input: {name: this.name, description: descStr}}))
+      API.graphql(graphqlOperation(createTodo, {input: {name: this.name, description: descStr}}))
       .then((res) => {
         this.logger.info(`Todo created`, res);
         this.list();

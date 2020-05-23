@@ -46,7 +46,7 @@ vue add vuetify
 vue add router
 vue add vuex
 amplify init
-npm install aws-amplify aws-amplify-vue --save
+npm install aws-amplify @aws-amplify/ui-vue --save
 npm i @aws-amplify/pubsub@2.1.9 --save  # 警告でたので手動でいれた
 
 amplify add auth

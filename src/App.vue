@@ -1,5 +1,7 @@
 <template>
   <v-app>
+  <amplify-authenticator>
+    <!-- The rest of your app code -->
     <v-toolbar max-height="56px">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>my-amplify-template</v-toolbar-title>
@@ -12,6 +14,8 @@
     <v-content style="padding: 12px">
       <router-view/>
     </v-content>
+<!--    <amplify-sign-out></amplify-sign-out>-->
+  </amplify-authenticator>
   </v-app>
 </template>
 
